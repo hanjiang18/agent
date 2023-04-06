@@ -1,0 +1,24 @@
+{
+  "configurations": [
+    {
+      "browse": {
+        "databaseFilename": "${default}",
+        "limitSymbolsToIncludedHeaders": false
+      },
+      "includePath": [
+        "/home/ccm/ccmslam_ws_c/devel_isolated/ccmslam/include/**",
+        "/opt/ros/melodic/include/**",
+        "/home/ccm/ccmslam_ws_c/devel_isolated/ccmslam_msgs/include/**",
+        "/home/ccm/ccmslam_ws_c/src/ccm_slam-master/cslam/include/**",
+        "/home/ccm/ccmslam_ws_c/src/usb_cam/include/**",
+        "/usr/include/**"
+      ],
+      "name": "ROS",
+      "intelliSenseMode": "gcc-x64",
+      "compilerPath": "/usr/bin/gcc",
+      "cStandard": "gnu11",
+      "cppStandard": "c++14"
+    }
+  ],
+  "version": 4
+}

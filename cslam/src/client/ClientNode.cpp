@@ -55,7 +55,7 @@ int main(int argc, char **argv) {
     ros::NodeHandle Nh;
     ros::NodeHandle NhPrivate("~");
 
-
+    //add rgbd 
     cslam::ClientSystem *pcs=new cslam::ClientSystem(Nh,NhPrivate,argv[1],argv[2],cslam::ClientSystem::RGBD);
     ImageGrabber igb(pcs);
     message_filters::Subscriber<sensor_msgs::Image> rgb_sub(Nh, "/camera/color/image_raw", 1);

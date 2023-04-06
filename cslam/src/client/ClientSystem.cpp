@@ -80,7 +80,7 @@ void ClientSystem::LoadVocabulary(const string &strVocFile)
     cout << endl << "Loading ORB Vocabulary. This could take a while..." << endl;
 
     mpVoc.reset(new ORBVocabulary());
-    bool bVocLoad = mpVoc->loadFromTextFile(strVocFile);
+    bool bVocLoad = mpVoc->loadFromBinaryFile(strVocFile);
     if(!bVocLoad)
     {
         cerr << "Wrong path to vocabulary. " << endl;

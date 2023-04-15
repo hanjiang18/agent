@@ -53,6 +53,9 @@ ClientSystem::ClientSystem(ros::NodeHandle Nh, ros::NodeHandle NhPrivate, const 
 
     this->LoadVocabulary(strVocFile);
 
+    //my add
+    this->InitializeKFDB();
+
     //+++++ Create KeyFrame Database +++++
     mpKFDB.reset(new KeyFrameDatabase(mpVoc));
 
@@ -88,6 +91,11 @@ void ClientSystem::LoadVocabulary(const string &strVocFile)
         exit(-1);
     }
     cout << "Vocabulary loaded!" << endl << endl;
+}
+
+void ClientSystem::InitializeKFDB()
+{
+    mpKFDB.reset(new KeyFrameDatabase(mpVoc));
 }
 
 } //end namespace

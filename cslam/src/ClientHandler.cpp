@@ -177,6 +177,11 @@ void ClientHandler::InitializeClient()
 {
     cout << "Client " << mClientId << " --> Initialize Threads" << endl;
 
+    //my add
+    // mpLoopFinder.reset(new LoopFinder(mpCC,mpKFDB,mpVoc,mpMap));
+    // mptLoopClosure.reset(new thread(&LoopFinder::Run,mpLoopFinder));
+    // usleep(10000);
+
     //+++++ Create Drawers. These are used by the Viewer +++++
     mpViewer.reset(new Viewer(mpMap,mpCC));
     usleep(10000);

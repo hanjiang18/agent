@@ -69,6 +69,7 @@ public:
     
 private:
     void LoadVocabulary(const string &strVocFile);
+    void InitializeKFDB();
 
     //ROS infrastructure
     ros::NodeHandle mNh;

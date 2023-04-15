@@ -62,6 +62,7 @@ public:
     typedef boost::shared_ptr<KeyFrameDatabase> dbptr;
     typedef boost::shared_ptr<KeyFrame> kfptr;
     typedef boost::shared_ptr<Map> mapptr;
+    typedef boost::shared_ptr<Frame> frameptr;
 public:
 
    KeyFrameDatabase(const vocptr pVoc);
@@ -77,7 +78,7 @@ public:
     vector<kfptr> DetectMapMatchCandidates(kfptr pKF, float minScore, mapptr pMap);
 
    // Relocalization
-   std::vector<kfptr> DetectRelocalizationCandidates(Frame& F);
+   std::vector<kfptr> DetectRelocalizationCandidates(frameptr F);
 
    //Debug
    typedef boost::shared_ptr<MapPoint> mpptr;

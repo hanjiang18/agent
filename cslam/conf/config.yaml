@@ -75,7 +75,7 @@ Tracking.TrackLocalMapInlierThres: 30
 # Mapping Parameters
 #--------------------------------------------------------------------------------------------
 
-Mapping.LocalMapSize: 500
+Mapping.LocalMapSize: 50
 Mapping.LocalMapBuffer: 20
 Mapping.RecentKFWindow: 20
 Mapping.RedThres: 0.98

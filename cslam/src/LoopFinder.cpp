@@ -72,22 +72,22 @@ void LoopFinder::Run()
         if(CheckKfQueue())
         #endif
         {
-            while(!mpCC->LockPlaceRec()){usleep(params::timings::miLockSleep);}
+            //while(!mpCC->LockPlaceRec()){usleep(params::timings::miLockSleep);}
 
             // Detect loop candidates and check covisibility consistency
             bool bDetect = DetectLoop();
 
-            if(bDetect)
-            {
-                // Compute similarity transformation [sR|t]
-                bool bSim3 = ComputeSim3();
-                if(bSim3)
-                {
-                    // Perform loop fusion and pose graph optimization
-                    CorrectLoop();
-                }
-            }
-            mpCC->UnLockPlaceRec();
+            // if(bDetect)
+            // {
+            //     // Compute similarity transformation [sR|t]
+            //     bool bSim3 = ComputeSim3();
+            //     if(bSim3)
+            //     {
+            //         // Perform loop fusion and pose graph optimization
+            //         CorrectLoop();
+            //     }
+            // }
+            // mpCC->UnLockPlaceRec();
         }
 
         ResetIfRequested();

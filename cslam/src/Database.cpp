@@ -326,7 +326,7 @@ vector<KeyFrameDatabase::kfptr> KeyFrameDatabase::DetectMapMatchCandidates(kfptr
     return vpLoopCandidates;
 }
 
-vector<KeyFrameDatabase::kfptr> KeyFrameDatabase::DetectRelocalizationCandidates(Frame &F)
+vector<KeyFrameDatabase::kfptr> KeyFrameDatabase::DetectRelocalizationCandidates(frameptr F)
 {
     list<kfptr> lKFsSharingWords;
 
@@ -334,17 +334,17 @@ vector<KeyFrameDatabase::kfptr> KeyFrameDatabase::DetectRelocalizationCandidates
     {
         unique_lock<mutex> lock(mMutex);
 
-        for(DBoW2::BowVector::const_iterator vit=F.mBowVec.begin(), vend=F.mBowVec.end(); vit != vend; vit++)
+        for(DBoW2::BowVector::const_iterator vit=F->mBowVec.begin(), vend=F->mBowVec.end(); vit != vend; vit++)
         {
             list<kfptr> &lKFs =   mvInvertedFile[vit->first];
 
             for(list<kfptr>::iterator lit=lKFs.begin(), lend= lKFs.end(); lit!=lend; lit++)
             {
                 kfptr pKFi=*lit;
-                if(pKFi->mRelocQuery!=F.mId)
+                if(pKFi->mRelocQuery!=F->mId)
                 {
                     pKFi->mnRelocWords=0;
-                    pKFi->mRelocQuery=F.mId;
+                    pKFi->mRelocQuery=F->mId;
                     lKFsSharingWords.push_back(pKFi);
                 }
                 pKFi->mnRelocWords++;
@@ -376,7 +376,7 @@ vector<KeyFrameDatabase::kfptr> KeyFrameDatabase::DetectRelocalizationCandidates
         if(pKFi->mnRelocWords>minCommonWords)
         {
             nscores++;
-            float si = mpVoc->score(F.mBowVec,pKFi->mBowVec);
+            float si = mpVoc->score(F->mBowVec,pKFi->mBowVec);
             pKFi->mRelocScore=si;
             lScoreAndMatch.push_back(make_pair(si,pKFi));
         }
@@ -400,7 +400,7 @@ vector<KeyFrameDatabase::kfptr> KeyFrameDatabase::DetectRelocalizationCandidates
         for(vector<kfptr>::iterator vit=vpNeighs.begin(), vend=vpNeighs.end(); vit!=vend; vit++)
         {
             kfptr pKF2 = *vit;
-            if(pKF2->mRelocQuery!=F.mId)
+            if(pKF2->mRelocQuery!=F->mId)
                 continue;
 
             accScore+=pKF2->mRelocScore;

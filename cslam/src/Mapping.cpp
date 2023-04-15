@@ -85,6 +85,9 @@ void LocalMapping::RunClient()
 
             mpMap->UnLockMapUpdate();
 
+            //my add relocal
+            mpKFDB->add(mpCurrentKeyFrame);
+
             if(!CheckNewKeyFrames() && !stopRequested())
             {
                 // Local BA

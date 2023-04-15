@@ -115,7 +115,8 @@ public:
 
     int mSensor;
 
-   
+   //my add
+   idpair mnLastRelocFrameId;
 
     eTrackingState mState;
     eTrackingState mLastProcessedState;
@@ -172,6 +173,8 @@ protected:
     void UpdateLocalKeyFrames();
 
     bool TrackLocalMap();
+    //my add
+    bool Relocalization();
     void SearchLocalPoints();
 
     bool NeedNewKeyFrame();

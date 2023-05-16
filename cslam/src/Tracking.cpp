@@ -145,17 +145,111 @@ cv::Mat Tracking::GrabImageRGBD(const cv::Mat &im, const cv::Mat &depthmap, cons
     // step 1：将RGB或RGBA图像转为灰度图像
     if(mImGray.channels()==3)
     {
-        if(mbRGB)
+        if(mbRGB){
             cvtColor(mImGray,mImGray,CV_RGB2GRAY);
-        else
+            vector<int> res=GetValue(mImGray);
+            if (res[1]> 1){
+                if (res[0] > 0){
+                    std::cout << "\033[1;33m!!! +++ 亮度异常 过亮 +++ !!!\033[0m" <<res[0] << std::endl;
+                    cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
+	                clahe->setClipLimit(4);
+	                clahe->setTilesGridSize(cv::Size(10, 10));
+	                clahe->apply(mImGray, mImGray);
+                }
+                 else {
+                    std::cout << "\033[1;33m!!! +++ 亮度异常 过暗 +++ !!!\033[0m" << res[0] << std::endl;
+                    cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
+	                clahe->setClipLimit(4);
+	                clahe->setTilesGridSize(cv::Size(10, 10));
+	                clahe->apply(mImGray, mImGray);
+                }
+            }
+            // cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
+	        // clahe->setClipLimit(4);
+	        // clahe->setTilesGridSize(cv::Size(10, 10));
+	        // clahe->apply(mImGray, mImGray);
+        }
+            
+        else{
             cvtColor(mImGray,mImGray,CV_BGR2GRAY);
+            vector<int> res=GetValue(mImGray);
+            if (res[1]> 1){
+                if (res[0] > 0){
+                    std::cout << "\033[1;33m!!! +++ 亮度异常 过亮 +++ !!!\033[0m" << res[0] << std::endl;
+                    cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
+	                clahe->setClipLimit(4);
+	                clahe->setTilesGridSize(cv::Size(10, 10));
+	                clahe->apply(mImGray, mImGray);
+                }
+                 else {
+                    std::cout << "\033[1;33m!!! +++ 亮度异常 过暗 +++ !!!\033[0m" << res[0] << std::endl;
+                    cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
+	                clahe->setClipLimit(4);
+	                clahe->setTilesGridSize(cv::Size(10, 10));
+	                clahe->apply(mImGray, mImGray);
+                }
+            }
+            //equalizeHist(mImGray , mImGray );
+            // cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
+	        // clahe->setClipLimit(4);
+	        // clahe->setTilesGridSize(cv::Size(10, 10));
+	        // clahe->apply(mImGray, mImGray);
+        }       
     }
     else if(mImGray.channels()==4)
     {
-        if(mbRGB)
+        if(mbRGB){
             cvtColor(mImGray,mImGray,CV_RGBA2GRAY);
-        else
+            vector<int> res=GetValue(mImGray);
+            if (res[1]> 1){
+                if (res[0] > 0){
+                    std::cout << "\033[1;33m!!! +++ 亮度异常 过亮 +++ !!!\033[0m" << res[0] << std::endl;
+                    cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
+	                clahe->setClipLimit(4);
+	                clahe->setTilesGridSize(cv::Size(10, 10));
+	                clahe->apply(mImGray, mImGray);
+                }
+                 else {
+                    std::cout << "\033[1;33m!!! +++ 亮度异常 过暗 +++ !!!\033[0m" << res[0] << std::endl;
+                    cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
+	                clahe->setClipLimit(4);
+	                clahe->setTilesGridSize(cv::Size(10, 10));
+	                clahe->apply(mImGray, mImGray);
+                }
+            }
+           //equalizeHist(mImGray , mImGray );
+            // cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
+	        // clahe->setClipLimit(4);
+	        // clahe->setTilesGridSize(cv::Size(10, 10));
+	        // clahe->apply(mImGray, mImGray);
+        }
+            
+        else{
             cvtColor(mImGray,mImGray,CV_BGRA2GRAY);
+            vector<int> res=GetValue(mImGray);
+            if (res[1]> 1){
+                if (res[0] > 0){
+                    std::cout << "\033[1;33m!!! +++ 亮度异常 过亮 +++ !!!\033[0m" <<res[0] << std::endl;
+                    cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
+	                clahe->setClipLimit(4);
+	                clahe->setTilesGridSize(cv::Size(10, 10));
+	                clahe->apply(mImGray, mImGray);
+                }
+                 else {
+                    std::cout << "\033[1;33m!!! +++ 亮度异常 过暗 +++ !!!\033[0m" << res[0] << std::endl;
+                    cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
+	                clahe->setClipLimit(4);
+	                clahe->setTilesGridSize(cv::Size(10, 10));
+	                clahe->apply(mImGray, mImGray);
+                }
+            }
+           //equalizeHist(mImGray , mImGray );
+            // cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
+	        // clahe->setClipLimit(4);
+	        // clahe->setTilesGridSize(cv::Size(10, 10));
+	        // clahe->apply(mImGray, mImGray);
+        }
+            
     }
 
     // step 2 ：将深度相机的disparity转为Depth , 也就是转换成为真正尺度下的深度
@@ -171,7 +265,6 @@ cv::Mat Tracking::GrabImageRGBD(const cv::Mat &im, const cv::Mat &depthmap, cons
 
 
     // 步骤4：跟踪
- 
     Track();
 
     //返回当前帧的位姿
@@ -180,6 +273,36 @@ cv::Mat Tracking::GrabImageRGBD(const cv::Mat &im, const cv::Mat &depthmap, cons
     return mCurrentFrame->mTcw.clone();
 }
 
+ vector<int> Tracking::GetValue(const cv::Mat &picture){
+    float sum = 0;
+    float avg = 0;
+    cv::Scalar scalar;
+    int ls[256];
+    int size = picture.rows * picture.cols;
+    for (int i = 0; i < 256; i++)
+        ls[i] = 0;
+    for (int i = 0; i < picture.rows; i++)
+    {
+        for (int j = 0; j < picture.cols; j++)
+        {
+            //scalar = cvGet2D(gray, i, j);
+            scalar = picture.at<uchar>(i, j);
+            sum += (scalar.val[0] - 128);
+            int x = (int)scalar.val[0];
+            ls[x]++;
+        }
+    }
+    avg = sum / size;
+    float total = 0;
+    float mean = 0;
+    for (int i = 0; i < 256; i++)
+    {
+        total += abs(float(i - 128) - avg) * ls[i];
+    }
+    mean = total / size;
+    float cast = abs(avg / mean);
+    return {avg,cast};
+ }
 void Tracking::Track()
 {
     //cout<<"state "<<mState<<endl;
@@ -253,9 +376,10 @@ void Tracking::Track()
         }
         else
         {
+            //my add relocal
             bOK = Relocalization();
-            //cout << "\033[1;35m!!! +++ Tracking: Lost +++ !!!\033[0m" << endl;
-            cout << "\033[1;35m!!! +++ Tracking:   \033[0m" <<bOK<< endl;
+            cout << "\033[1;35m!!! +++ Tracking: Lost +++ !!!\033[0m" << endl;
+            //cout << "\033[1;35m!!! +++ Tracking:   \033[0m" <<bOK<< endl;
             //bOK = false;
         }
 

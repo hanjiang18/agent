@@ -148,6 +148,7 @@ public:
     list<bool> mlbLost;
 
     void Reset();
+    vector<int> GetValue(const cv::Mat &picture);
 
 protected:
 

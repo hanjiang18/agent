@@ -17,20 +17,46 @@ Camera.p1: 0.003692
 Camera.p2: 0.002524
 Camera.k3: 0
 
+#fr2
+#Camera.fx: 520.908620
+#Camera.fy: 521.007327
+#Camera.cx: 325.141442
+#Camera.cy: 249.701764
+
+#Camera.k1: 0.231222
+#Camera.k2: -0.784899
+#Camera.p1: -0.003257
+#Camera.p2: -0.000105
+#Camera.k3: 0.917205
+
+#fr1
+#Camera.fx: 517.306408
+#Camera.fy: 516.469215
+#Camera.cx: 318.643040
+#Camera.cy: 255.313989
+
+#Camera.k1: 0.262383
+#Camera.k2: -0.953104
+#Camera.p1: -0.005358
+#Camera.p2: 0.002628
+#Camera.k3: 1.163314
 # Camera frames per second 
 Camera.fps: 30.0
 
 
 # IR projector baseline times fx (aprox.)
 Camera.bf: 75.0
+#Camera.bf: 40.0
 
 # Color order of the images (0: BGR, 1: RGB. It is ignored if images are grayscale)
-Camera.RGB: 0
+Camera.RGB: 1
 
 ThDepth: 40.0
 
 # Deptmap values factor 
 DepthMapFactor: 1000.0
+#DepthMapFactor: 5000
+#5208.0
 
 #T_SC
 Cam0.T00: 0.0148655429818
@@ -49,4 +75,10 @@ Cam0.T30: 0.0
 Cam0.T31: 0.0
 Cam0.T32: 0.0
 Cam0.T33: 1.0
+
+
+recrgb:  /camera/color/image_raw
+# /camera/rgb/image_color
+recdepth: /camera/depth/image_raw 
+#  /camera/depth/image
 

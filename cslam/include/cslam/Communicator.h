@@ -156,7 +156,7 @@ protected:
     ros::NodeHandle mNh;
     ros::NodeHandle mNhPrivate;
 
-    ros::Publisher mPubMap;
+    ros::Publisher mPubMap,mpubPrune;
     ros::Subscriber mSubMap;
 
     string mSubKfTopicName;

@@ -8,5 +8,6 @@
         "/home/ccm/ccmslam_ws_c/devel_isolated/ccmslam/lib/python2.7/dist-packages",
         "/home/ccm/ccmslam_ws_c/devel_isolated/ccmslam_msgs/lib/python2.7/dist-packages",
         "/opt/ros/melodic/lib/python2.7/dist-packages"
-    ]
+    ],
+    "ros.distro": "melodic"
 }

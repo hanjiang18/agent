@@ -54,12 +54,15 @@ int main(int argc, char **argv) {
 
     ros::NodeHandle Nh;
     ros::NodeHandle NhPrivate("~");
+     cv::FileStorage fSettings(argv[2],cv::FileStorage::READ);
+    string path_rgb=fSettings["recrgb"];
+    string path_depth=fSettings["recdepth"];
 
     //add rgbd 
     cslam::ClientSystem *pcs=new cslam::ClientSystem(Nh,NhPrivate,argv[1],argv[2],cslam::ClientSystem::RGBD);
     ImageGrabber igb(pcs);
-    message_filters::Subscriber<sensor_msgs::Image> rgb_sub(Nh, "/camera/color/image_raw", 1);
-    message_filters::Subscriber<sensor_msgs::Image> depth_sub(Nh, "/camera/depth/image_raw", 1);
+    message_filters::Subscriber<sensor_msgs::Image> rgb_sub(Nh, path_rgb, 1);
+    message_filters::Subscriber<sensor_msgs::Image> depth_sub(Nh,path_depth, 1);
     typedef message_filters::sync_policies::ApproximateTime<sensor_msgs::Image, sensor_msgs::Image> sync_pol;
     message_filters::Synchronizer<sync_pol> sync(sync_pol(10), rgb_sub,depth_sub);
     sync.registerCallback(boost::bind(& ImageGrabber::GrabRGBD,&igb,_1,_2));

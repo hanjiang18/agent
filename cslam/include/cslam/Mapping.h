@@ -122,6 +122,10 @@ protected:
 
     void MapPointCullingClient();
     void MapPointCullingServer();
+
+    //my add kfculling
+    bool KeyFrameCulling();
+
     size_t mCountKFs;
     void SearchInNeighbors();
 

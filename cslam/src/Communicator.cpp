@@ -519,6 +519,7 @@ void Communicator::PublishMapClient()
                 sit = mspBufferKfOut.erase(sit);
                 continue;
             }
+            //cout<<"pcurr : "<<pCurKf->mId.first<<endl;
 
             int nFullKFs = msgMap.Keyframes.size(); //we need this to determine whether a full KF was added or not
             //cout<<"    ----- "<<pCurKf->mId.first<<endl;
@@ -634,6 +635,7 @@ void Communicator::PublishMapClient()
         msgMap.mMsgId = mOutMapCount;
         msgMap.header.stamp = ros::Time::now();
         mPubMap.publish(msgMap);
+        
     }
 }
 

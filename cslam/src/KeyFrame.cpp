@@ -138,9 +138,6 @@ KeyFrame::KeyFrame(ccmslam_msgs::KF* pMsg, vocptr pVoc, mapptr pMap, dbptr pKFDB
 
     mbOmitSending = false;
 
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-    // Call EstablishInitialConnectionsX()
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 }
 
 void KeyFrame::EstablishInitialConnectionsServer()
@@ -1297,7 +1294,8 @@ void KeyFrame::SendMe()
         for(set<commptr>::const_iterator sit = mspComm.begin();sit!=mspComm.end();++sit)
         {
             commptr pComm = *sit;
-            pComm->PassKftoComm(this->shared_from_this());
+            //cout<<"kf send"<<this->mId.first<<endl;
+            //pComm->PassKftoComm(this->shared_from_this());
         }
     }
 }
@@ -2046,6 +2044,9 @@ void KeyFrame::getPCinfo(cv::Mat& color, cv::Mat& depth){
         for ( int n=0; n<depth.cols; n+=3 )
         {
             float d = depth.ptr<float>(m)[n];
+            // if(d!=d)
+            //     d=-1;
+            //cout<<"depth-------------    "<<d<<endl;
             passDepth.push_back(d);
             passx.push_back(( n - (this->cx)) * d/ (this->fx));
             passy.push_back(( m - (this->cy)) * d / (this->fy));

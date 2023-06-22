@@ -236,6 +236,7 @@ void Map::AddKeyFrame(kfptr pKF)
             {
                 commptr pComm = *(mspComm.begin());
                 if(!pKF->mbFromServer)
+                    //cout<<"map send"<<pKF->mId.first<<endl;
                     pComm->PassKftoComm(pKF);
             }
         }
@@ -254,7 +255,7 @@ void Map::AddKeyFrame(kfptr pKF)
             mnMaxKFid=pKF->mId.first;
         if(pKF->mUniqueId>mnMaxKFidUnique)
             mnMaxKFidUnique=pKF->mUniqueId;
-
+        //mmpkeyframe表示的是所有关键帧
         mmpKeyFrames[pKF->mId] = pKF;
         //cout<<"addd "<<pKF->mId.first<<" "<<pKF->mId.second<<endl;
         if(mSysState == SERVER)

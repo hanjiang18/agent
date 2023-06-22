@@ -494,7 +494,7 @@ void Viewer::DrawMap(mapptr pMap)
 
     VisBundle VB;
     VB.mmpKFs = pMap->GetMmpKeyFrames();
-    cout<<"mmpkfs : "<<VB.mmpKFs.size()<<endl;
+    //cout<<"mmpkfs : "<<VB.mmpKFs.size()<<endl;
     VB.mmpMPs = pMap->GetMmpMapPoints();
     VB.mNativeId = pMap->mMapId;
     VB.mMaxKfId = pMap->GetMaxKFid();

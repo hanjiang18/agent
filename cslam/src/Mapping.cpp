@@ -94,7 +94,12 @@ void LocalMapping::RunClient()
                 if(mpMap->KeyFramesInMap()>2)
                     Optimizer::LocalBundleAdjustmentClient(mpCurrentKeyFrame,&mbAbortBA,mpMap,mClientId);
                 //kfculling
+                    // if(!KeyFrameCulling()){
+                    //     mpMap->AddKeyFrame(mpCurrentKeyFrame);
+                    // }
+
             }
+
 
             if(params::sys::mbStrictLock)
                 mpCC->UnLockMapping();
@@ -934,5 +939,64 @@ void LocalMapping::ClearCovGraph(size_t MapId)
 {
     mpViewer->ClearCovGraph(MapId);
 }
+
+bool LocalMapping::KeyFrameCulling(){
+        kfptr pKF = mpCurrentKeyFrame;
+        if(pKF->mId.first==0 || pKF->mId.first==1) //don't cull 0, since it's the origin, and also not one, because this was the other KF used for initialization. The systen won't experience problems if culling 1, nevetheless we don't do it.
+            return false;
+
+        const vector<mpptr> vpMapPoints = pKF->GetMapPointMatches();
+
+        const int thObs=3;
+        int nRedundantObservations=0;
+        int nMPs=0;
+        for(size_t i=0, iend=vpMapPoints.size(); i<iend; i++)
+        {
+            mpptr pMP = vpMapPoints[i];
+            if(pMP)
+            {
+                if(!pMP->isBad())
+                {
+                    nMPs++;
+                    if(pMP->Observations()>thObs)
+                    {
+                        const int &scaleLevel = pKF->mvKeysUn[i].octave;
+                        const map<kfptr, size_t> observations = pMP->GetObservations();
+                        int nObs=0;
+                        for(map<kfptr, size_t>::const_iterator mit=observations.begin(), mend=observations.end(); mit!=mend; mit++)
+                        {
+                            kfptr pKFi = mit->first;
+
+                            if(pKFi->isBad()) continue;
+
+                            if(pKFi==pKF)
+                                continue;
+                            const int &scaleLeveli = pKFi->mvKeysUn[mit->second].octave;
+
+                            if(scaleLeveli<=scaleLevel+1)
+                            {
+                                nObs++;
+                                if(nObs>=thObs)
+                                    break;
+                            }
+                        }
+                        if(nObs>=thObs)
+                        {
+                            nRedundantObservations++;
+                        }
+                    }
+                }
+            }
+        }
+
+        if(nRedundantObservations>0.9*nMPs)
+        {
+            //pKF->SetBadFlag();
+            cout<<"culling ---"<<endl;
+            ++mCulledKfs;
+            return true;
+        }
+        return false;
+    }
 
 } //end ns

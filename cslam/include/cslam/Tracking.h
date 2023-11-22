@@ -32,6 +32,7 @@
 #include <mutex>
 #include <iostream>
 #include <fstream>
+#include <list>
 #include <opencv2/opencv.hpp>
 
 //CSLAM
@@ -90,6 +91,7 @@ public:
     typedef boost::shared_ptr<Frame> frameptr;
     typedef boost::shared_ptr<ClientSystem> csptr;
 
+    using details_type = std::list< std::pair<std::string, cv::Mat> >;
     
 
 public:
@@ -103,6 +105,16 @@ public:
     // Pointer Setters
     void SetLocalMapper(mappingptr pLocalMapper) {mpLocalMapper = pLocalMapper;}
     void SetCommunicator(commptr pComm) {mpComm = pComm;}
+
+
+    cv::Mat make_pad(const cv::Mat& one_image, const int pad_H, const int pad_W);
+    std::list< std::pair<std::string, cv::Mat> >dong_enhance(
+        const cv::Mat& low_light,
+        const int radius=3,
+        const int A_pixels=100,
+        const float weight=0.8,
+        const float border=0.5,
+        const bool denoise=false) ;
 
     // Tracking states
     enum eTrackingState{
@@ -148,7 +160,7 @@ public:
     list<bool> mlbLost;
 
     void Reset();
-    vector<int>  GetValue(const cv::Mat &picture);
+    vector<float>  GetValue(const cv::Mat &picture);
 
 protected:
 

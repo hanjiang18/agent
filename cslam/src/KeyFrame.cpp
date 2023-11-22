@@ -2050,9 +2050,9 @@ void KeyFrame::getPCinfo(cv::Mat& color, cv::Mat& depth){
             passDepth.push_back(d);
             passx.push_back(( n - (this->cx)) * d/ (this->fx));
             passy.push_back(( m - (this->cy)) * d / (this->fy));
-            passblue.push_back((int)color.ptr<uchar>(m)[n*3]);
+            passblue.push_back((int)color.ptr<uchar>(m)[n*3+2]);
             passgreen.push_back((int)color.ptr<uchar>(m)[n*3+1]);
-            passred.push_back((int)color.ptr<uchar>(m)[n*3+2]);
+            passred.push_back((int)color.ptr<uchar>(m)[n*3]);
         }
     }
 }

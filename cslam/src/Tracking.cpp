@@ -141,108 +141,7 @@ cv::Mat Tracking::GrabImageRGBD(const cv::Mat &im, const cv::Mat &depthmap, cons
     mImGray = im;
     mImRGB=im;
     imDepth = depthmap;
-
-    // step 1：将RGB或RGBA图像转为灰度图像
-    // if(mImGray.channels()==3)
-    // {
-    //     if(mbRGB){
-    //         cvtColor(mImGray,mImGray,CV_RGB2GRAY);
-           
-    //         vector<float> res=GetValue(mImGray);
-    //         if (res[1]<1){
-    //             if (res[0] > 0){
-    //                 //std::cout << "\033[1;33m!!! +++ 亮度异常 过亮 +++ !!!\033[0m" <<res[0] << std::endl;
-    //                 cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
-	//                 clahe->setClipLimit(4);
-	//                 clahe->setTilesGridSize(cv::Size(10, 10));
-	//                 clahe->apply(mImGray, mImGray);
-    //             }
-    //              else {
-    //                 //std::cout << "\033[1;33m!!! +++ 亮度异常 过暗 +++ !!!\033[0m" << res[0] << std::endl;
-    //                 cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
-	//                 clahe->setClipLimit(4);
-	//                 clahe->setTilesGridSize(cv::Size(10, 10));
-	//                 clahe->apply(mImGray, mImGray);
-    //             }
-    //         }
-    //     }
-            
-    //     else{
-    //         cvtColor(mImGray,mImGray,CV_BGR2GRAY);
-            
-    //         vector<float> res=GetValue(mImGray);
-    //         if (res[1]>3){
-    //             if (res[0] > 0){
-    //                 //std::cout << "\033[1;33m!!! +++ 亮度异常 过亮 +++ !!!\033[0m" << res[0] << std::endl;
-    //                 cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
-	//                 clahe->setClipLimit(4);
-	//                 clahe->setTilesGridSize(cv::Size(10, 10));
-	//                 clahe->apply(mImGray, mImGray);
-    //             }
-    //              else {
-    //                 //std::cout << "\033[1;33m!!! +++ 亮度异常 过暗 +++ !!!\033[0m" << res[0] << std::endl;
-    //                 cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
-	//                 clahe->setClipLimit(4);
-	//                 clahe->setTilesGridSize(cv::Size(10, 10));
-	//                 clahe->apply(mImGray, mImGray);
-    //             }
-    //         }
-    //     }       
-    // }
-    // else if(mImGray.channels()==4)
-    // {
-    //     if(mbRGB){
-    //         cvtColor(mImGray,mImGray,CV_RGBA2GRAY);
-            
-    //         vector<float> res=GetValue(mImGray);
-    //         if (res[1]>3){
-    //             if (res[0] > 0){
-    //                // std::cout << "\033[1;33m!!! +++ 亮度异常 过亮 +++ !!!\033[0m" << res[0] << std::endl;
-    //                 cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
-	//                 clahe->setClipLimit(4);
-	//                 clahe->setTilesGridSize(cv::Size(10, 10));
-	//                 clahe->apply(mImGray, mImGray);
-    //             }
-    //              else {
-    //                 //std::cout << "\033[1;33m!!! +++ 亮度异常 过暗 +++ !!!\033[0m" << res[0] << std::endl;
-    //                 cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
-	//                 clahe->setClipLimit(4);
-	//                 clahe->setTilesGridSize(cv::Size(10, 10));
-	//                 clahe->apply(mImGray, mImGray);
-    //             }
-    //         }
-    //     }
-            
-    //     else{
-    //         cvtColor(mImGray,mImGray,CV_BGRA2GRAY);
-            
-    //         vector<float> res=GetValue(mImGray);
-    //         if (res[1]>3){
-    //             if (res[0] > 0){
-    //                 //std::cout << "\033[1;33m!!! +++ 亮度异常 过亮 +++ !!!\033[0m" <<res[0] << std::endl;
-    //                 cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
-	//                 clahe->setClipLimit(4);
-	//                 clahe->setTilesGridSize(cv::Size(10, 10));
-	//                 clahe->apply(mImGray, mImGray);
-    //             }
-    //              else {
-    //                 //std::cout << "\033[1;33m!!! +++ 亮度异常 过暗 +++ !!!\033[0m" << res[0] << std::endl;
-    //                 cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
-	//                 clahe->setClipLimit(4);
-	//                 clahe->setTilesGridSize(cv::Size(10, 10));
-	//                 clahe->apply(mImGray, mImGray);
-    //             }
-    //         }
-    //     }
-            
-    // }
-
-    auto collections = dong_enhance(mImRGB, 3, 100, 0.8, 0.5, false);
-    mImRGB= collections.back().second;
-     cvtColor(mImRGB,mImGray,CV_RGB2GRAY);
-
      vector<float> res=GetValue(mImGray);
-     cout<<res[1]<<" "<<res[0]<<endl;
             if (res[1]>2){
                 if (res[0] > 0){
                     //std::cout << "\033[1;33m!!! +++ 亮度异常 过亮 +++ !!!\033[0m" <<res[0] << std::endl;
@@ -252,12 +151,16 @@ cv::Mat Tracking::GrabImageRGBD(const cv::Mat &im, const cv::Mat &depthmap, cons
 	                clahe->apply(mImGray, mImGray);
                 }
                  else {
-                    //std::cout << "\033[1;33m!!! +++ 亮度异常 过暗 +++ !!!\033[0m" << res[0] << std::endl;
+                    auto collections = dong_enhance(mImRGB, 3, 100, 0.8, 0.5, false);
+                    mImRGB= collections.back().second;
+                    cvtColor(mImRGB,mImGray,CV_RGB2GRAY);
                     cv::Ptr<CLAHE> clahe = cv::createCLAHE(3.0, cv::Size(8, 8));
 	                clahe->setClipLimit(4);
 	                clahe->setTilesGridSize(cv::Size(10, 10));
 	                clahe->apply(mImGray, mImGray);
                 }
+            }else{
+                cvtColor(mImRGB,mImGray,CV_RGB2GRAY);
             }
         
 
